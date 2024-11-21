@@ -14,7 +14,8 @@ traefik:
 
   ports:
     web:
-      redirectTo: websecure
+      redirectTo:
+        port: websecure
 
   # For more information on Traefik's TLS options, see https://doc.traefik.io/traefik/https/tls/
   tlsOptions:
