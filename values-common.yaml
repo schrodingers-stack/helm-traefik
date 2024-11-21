@@ -1,0 +1,41 @@
+# Configuration of the Traefik Helm chart.
+# Default values available on the following link (choose sam version as in the dependencies of the Chart.yaml):
+# https://artifacthub.io/packages/helm/traefik/traefik?modal=values
+traefik:
+  deployment:
+    replicas: 2
+
+  resources:
+    requests:
+      cpu: 150m
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+  ports:
+    web:
+      redirectTo: websecure
+
+  # For more information on Traefik's TLS options, see https://doc.traefik.io/traefik/https/tls/
+  tlsOptions:
+    default:
+      minVersion: VersionTLS12
+
+  logs:
+    general:
+      # Reduce the default log level from INFO to WARN.
+      level: WARN
+    access:
+      # Enable access logs.
+      enabled: true
+
+  metrics:
+    prometheus:
+      service:
+        enabled: true
+    serviceMonitor:
+      enabled: false
+
+# Values for configuring the templates provided by the Schrödinger's Stack.
+schtack:
+  grafanaDashboards: false
